@@ -1,0 +1,165 @@
+﻿html, body {
+    background: #222;
+}
+
+body{
+    color: #FFF;
+}
+
+h1{
+    color: #FFF;
+}
+
+footer{
+    color:#FFF;
+}
+
+a:link{
+    color: #FFF;
+}
+
+a:visited{
+    color: #FFF;
+}
+
+a:hover{
+    color: #EEE;
+}
+
+input, select{
+    background-color: black;
+    color: white;
+    border-color: #222 !important;
+}
+
+/***********************Sidebar**********************/
+
+#sidebar-wrapper{
+    background: #333;
+}
+
+#sidebar{
+    background: #333;
+}
+
+.hover-class::after{
+    border-bottom: 1px solid #222;
+}
+
+.hover-class a:hover{
+    background: #444;
+}
+
+#menulinkbox ul li:nth-child(2) a{
+    background-image: url('../images/commercial/bzklsw_contract-manager_dark.svg');
+    background-repeat: no-repeat;
+    background-size: auto 85%;
+    background-position: 20px;
+    color: transparent;
+}
+
+#sidebar-menu-item {
+    background-color: #333;
+}
+
+/****************************BREADCRUMB*********************/
+
+#breadcrumb{
+  /*box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5) inset !important;*/
+}
+
+#breadcrumb a{
+    color: #DDD;
+}
+
+#logout-item{
+    background-image: url('../images/custom/ic_logout-light_24px.svg');
+}
+
+/******************SECTIONWRAPPER***********/
+
+
+/***************CONTENT*****************/
+
+#content{
+}
+
+.innerWrapper{
+    background-color: #111;
+}
+
+/***************FOOTER*****************/
+footer{
+  background-color:#111;
+}
+
+/*******************************************************************/
+  /********************************Content*************************/
+  /***************************************************************/
+
+
+    #content a {
+        color: #40b3e6;
+    }
+
+  .actionBtn{
+      background-color: #333;
+  }
+
+#createContractBtn{
+}
+
+.textBtn{
+    background-color: #1356FD;
+    color: white !important;
+}
+
+.textBtn :hover {
+    background-color: #40b3e6;
+}
+
+  table{
+      color: white;
+  }
+
+  th, td{
+      border: 1px solid #222;
+  }
+  
+	/*  Define the background color for all the EVEN table columns  */
+	.table tr:nth-child(even){
+		background: #3e3e3e;
+	}
+    /*  Define the background color for all the ODD table columns  */
+	.table tr:nth-child(odd){ 
+		background: #333;
+	}
+    /*  Define the background color for first child  */
+	.table th{ 
+		background: #282828;
+        color: white;
+	}
+
+    /****************StyleClasses*************************/
+
+.top-navigation a, .top-navigation span {
+    /*background-color: black;*/
+    color: white !important;
+}
+
+    .top-navigation a:hover, .top-navigation a:active, .top-navigation a:focus, .top-navigation.selected, .top-navigation ul .active {
+        color: #1399FD !important;
+        border-bottom-color: #1356FD;
+    }
+
+.control-label {
+    color: #1356FD;
+}
+
+.link {
+    color: #1356FD !important;
+}
+
+    .link:hover {
+        color: #1399FD !important;
+    }

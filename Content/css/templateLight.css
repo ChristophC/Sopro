@@ -1,0 +1,170 @@
+﻿html, body {
+    background: #c7c6c6;
+}
+
+body {
+    color: #333;
+}
+
+h1 {
+    color: #000;
+}
+
+footer {
+    color: #FFF;
+}
+
+a:link {
+    color: #000;
+}
+
+a:visited {
+    color: #000;
+}
+
+a:hover {
+    color: #033;
+}
+
+input, select{
+    background-color: white;
+    color: black;
+    border-color: #999 !important;
+}
+
+/***********************Sidebar**********************/
+
+#sidebar-wrapper {
+    background: #FFF;
+}
+
+#sidebar {
+    background: #FFF;
+}
+
+.hover-class::after {
+    border-bottom: 1px solid #EEE;
+}
+
+.hover-class a:hover {
+    background: #DDD;
+}
+
+#menulinkbox ul li:nth-child(2) a {
+    background-image: url('../images/commercial/bzklsw_contract-manager_light.svg');
+    background-repeat: no-repeat;
+    background-size: auto 85%;
+    background-position: 20px;
+    color: transparent;
+}
+
+#sidebar-menu-item {
+    background-color: #FFF;
+    color: black;
+    position: absolute;
+    top: 0px;
+}
+
+/****************************BREADCRUMB*********************/
+
+#breadcrumb {
+    /*box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5) inset !important;*/
+}
+
+    #breadcrumb a {
+        color: #000;
+    }
+
+#logout-item {
+    background-image: url('../images/custom/ic_logout_24px.svg');
+}
+
+/******************SECTIONWRAPPER***********/
+
+
+/***************CONTENT*****************/
+
+#content {
+    /*background-color: #FFF;*/
+}
+
+.innerWrapper {
+    background-color: white;
+}
+
+/***************FOOTER*****************/
+footer {
+    background-color: #999;
+}
+
+/*******************************************************************/
+/********************************Content*************************/
+/***************************************************************/
+
+
+#content a {
+    color: #0053ff;
+}
+
+.actionBtn {
+    background-color: #DDD;
+}
+
+#createContractBtn {
+}
+
+.textBtn {
+    background-color: #1356FD;
+    color: white !important;
+}
+
+    .textBtn:hover {
+        background-color: #1388FD;
+    }
+
+table {
+    color: black;
+}
+
+th, td {
+    border: 1px solid #FFF;
+}
+
+/*  Define the background color for all the EVEN table columns  */
+.table tr:nth-child(even) {
+    background: #f7fafb;
+}
+/*  Define the background color for all the ODD table columns  */
+.table tr:nth-child(odd) {
+    background: #ecf4f6;
+}
+/*  Define the background color for first child  */
+.table th {
+    background: #b5b5b5;
+    color: white;
+}
+
+
+/****************StyleClasses*************************/
+
+.top-navigation a, .top-navigation span {
+    /*background-color: white;*/
+    color: black !important;
+}
+
+    .top-navigation a:hover, .top-navigation a:active, .top-navigation a:focus, .top-navigation.selected, .top-navigation ul .active {
+        color: #1399FD !important;
+        border-bottom-color: #1356FD;
+    }
+
+.control-label {
+    color: #1356FD;
+}
+
+.link {
+    color: #1356FD !important;
+}
+
+    .link:hover {
+        color: #1399FD !important;
+    }

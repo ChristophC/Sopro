@@ -1,0 +1,31 @@
+﻿
+.ui-dialog-titlebar-close{
+    background: none;
+}
+
+.ui-dialog-titlebar-close::before{
+    font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 18px;  /* Preferred icon size */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+
+
+    background: none;
+    content: "check";
+}
+
+.ui-widget{  
+    font-family: 'Segoe UI', sans-serif !important;
+}
