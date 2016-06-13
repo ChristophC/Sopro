@@ -39,13 +39,13 @@ namespace WebApplication1.Controllers
             ViewBag.OwnerName = currentUserId;
 
             string currentDepartmentName = QueryUtility.GetDepartmentsOfUser(currentName, db).Select(d => d.DepartmentName).FirstOrDefault();
-            //ViewBag.ClientSelect = new SelectList(db.Mandants, "Id", "MandantName");
+            ViewBag.ClientSelect = new SelectList(db.Mandants, "Id", "MandantName");
 
             IQueryable<Mandant> currentClient = QueryUtility.GetClientOfDepartment(currentDepartmentName, db);
             string currentClientName = currentClient.Select(c => c.MandantName).FirstOrDefault();
 
-           // ViewBag.CoordinatorId = new SelectList(QueryUtility.GetCoordinatorsFromClient(currentClientName, db), "Id", "UserName");
-            //ViewBag.ClientId = new SelectList(db.Mandants, "Id", "MandantName");
+           //ViewBag.CoordinatorId = new SelectList(QueryUtility.GetCoordinatorsFromClient(currentClientName, db), "Id", "UserName");
+           //ViewBag.ClientId = new SelectList(db.Mandants, "Id", "MandantName");
 
             initViewModel.Coordinators = new SelectList(QueryUtility.GetCoordinatorsFromClient(currentClientName, db), "Id", "UserName");
             initViewModel.Signers = new SelectList(db.Users);//Chr: All Users, change Later
@@ -122,6 +122,28 @@ namespace WebApplication1.Controllers
             //load the cType and set it
             var cType = db.ContractTypes.Find(generalViewModel.ContractsTypeId);
             contract.ContractType = cType;
+
+            //FrameContract
+            FrameContract frame;
+            switch (generalViewModel.FrameOptionChosen)
+            {
+                case "FrameMain":
+                    frame = new FrameContract();
+                    frame.MainContract = contract;
+                    contract.IsFrameContract = true;
+                    db.FrameContracts.Add(frame);
+                    break;
+                case "FrameSub":
+                    var fMain = db.FrameContracts.Find(generalViewModel.MainFrameIdSelected);
+                    frame = (FrameContract)fMain;
+                    frame.Contracts.Add(contract);
+                    contract.FrameContract = frame;
+                    db.Entry(frame).State = EntityState.Modified;
+                    break;
+                case "NoFrame":
+                default:
+                    break;
+            }
 
             db.Entry(contract).State = EntityState.Modified;
             db.SaveChanges();
