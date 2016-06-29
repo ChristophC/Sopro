@@ -6,15 +6,16 @@ using System.Web;
 
 namespace WebApplication1.Models
 {
-    public class ContractFile
+    public class ContractCostCenter_Relation
     {
         public int Id { get; set; }
-        public string FileName { get; set; }
-        public string FileType { get; set; }
-        [Required]
-        [DataType(DataType.Url)]
-        public string FileUrl { get; set; }
+        public int ContractId { get; set; }
+        public int CostCenterId { get; set; }
+
+        [Range(0, 1)]
+        public double Percentage { get; set; }
 
         public virtual Contract Contract { get; set; }
+        public virtual CostCenter CostCenter { get; set; }
     }
 }

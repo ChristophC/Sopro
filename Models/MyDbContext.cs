@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using WebApplication1.Models.LinkTables;
 
 namespace WebApplication1.Models
 {
-    public class MyDbContext : IdentityDbContext<ContractUser> 
+    public class MyDbContext : IdentityDbContext<ContractUser>
     {
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -26,13 +27,7 @@ namespace WebApplication1.Models
                         .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Contract>()
-                        .HasOptional(c => c.Coordinator)
-                        .WithMany(d => d.CoordinatorContracts)
-                        .HasForeignKey(c => c.CoordinatorId)
-                        .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Contract>()
-                        .HasOptional(c => c.Signer)
+                        .HasRequired(c => c.Signer)
                         .WithMany(d => d.SignerContracts)
                         .HasForeignKey(c => c.SignerId)
                         .WillCascadeOnDelete(false);
@@ -56,15 +51,30 @@ namespace WebApplication1.Models
                         .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Department>()
-                            .HasOptional(c => c.StvDispatcher)
-                            .WithMany(o => o.StvDispatcherDepartments)
-                            .HasForeignKey(c => c.StvDispatcherId)
+                            .HasOptional(c => c.ViceDispatcher)
+                            .WithMany(o => o.ViceDispatcherDepartments)
+                            .HasForeignKey(c => c.ViceDispatcherId)
                             .WillCascadeOnDelete(false);
+
+            //David: Framecontract
+            modelBuilder.Entity<Contract>()
+                            .HasOptional(f => f.FrameContract)
+                            .WithMany(s => s.SubContracts)
+                            .HasForeignKey(f => f.FrameContractId);
+
+            //Do not delete!!
+            ////Ober: CostCenter_Contract_Relation
+            //modelBuilder.Entity<Contract>()
+            //                .HasMany(c => c.CostCenters).WithMany(i => i.Contracts)
+            //                .Map(t => t.MapLeftKey("ContractId")
+            //                .MapRightKey("CostCenterId")
+            //                .ToTable("ContractCostCenter_Relation"));
 
         }
 
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<ContractFile> ContractFiles { get; set; }
+        public DbSet<ContractTask> ContractTasks{ get; set; }
         public DbSet<ContractKind> ContractKinds { get; set; }
         public DbSet<ContractType> ContractTypes { get; set; }
         public DbSet<ContractStatus> ContractStatuses { get; set; }
@@ -73,12 +83,15 @@ namespace WebApplication1.Models
         public DbSet<PhysicalDocAddress> PhysicalDocAddresses { get; set; }
         public DbSet<CostCenter> CostCenters { get; set; }
         public DbSet<CostKind> CostKinds { get; set; }
-        public DbSet<FrameContract> FrameContracts { get; set; }
         public DbSet<VarPayment> VarPayments { get; set; }
-        public DbSet<Mandant> Mandants { get; set; }
+        public DbSet<Client> Clients { get; set; }
         public DbSet<Department> Departments { get; set; }
-        public DbSet<MU_Relation> MU_Relations { get; set; }
-        public DbSet<DU_Relation> DU_Relations { get; set; }
+        public DbSet<CoordinatorClient_Relation> CoordinatorClient_Relations { get; set; }
+        public DbSet<DepartmentUser_Relation> DepartmentUser_Relations { get; set; }
+        public DbSet<ReadAccessUser> ReadAccessUsers { get; set; }
+        public DbSet<ReadAccessDepartments> ReadAccessDepartments { get; set; }
+        public DbSet<CoordinatorDepartment_Relation> CoordinatorDepartment_Relations { get; set; }
+        public DbSet<ContractCostCenter_Relation> ContractCostCenter_Relations { get; set; }
 
     }
 }

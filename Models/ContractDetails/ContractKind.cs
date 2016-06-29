@@ -5,11 +5,10 @@ using System.Web;
 
 namespace WebApplication1.Models
 {
-    public class ContractPartner
+    public class ContractKind
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string IBAN { get; set; }
+        public string Description { get; set; }
 
         public virtual ICollection<Contract> Contracts { get; set; }
     }

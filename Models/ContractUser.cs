@@ -10,11 +10,12 @@ namespace WebApplication1.Models
     {
         public virtual ICollection<Contract> OwnerContracts { get; set; }
         public virtual ICollection<Contract> DispatcherContracts { get; set; }
-        public virtual ICollection<Contract> CoordinatorContracts { get; set; }
         public virtual ICollection<Contract> SignerContracts { get; set; }
-        public virtual ICollection<DU_Relation> DU_Realtions { get; set; }
-        public virtual ICollection<MU_Relation> MU_Relations { get; set; }
+        public virtual ICollection<ContractTask> OwnerContractTasks { get; set; }
+        public virtual ICollection<DepartmentUser_Relation> DepartmentUser_Relations { get; set; }
+        public virtual ICollection<CoordinatorClient_Relation> CoordinatorClient_Relations { get; set; }
         public virtual ICollection<Department> DispatcherDepartments { get; set; }
-        public virtual ICollection<Department> StvDispatcherDepartments { get; set; }
+        public virtual ICollection<Department> ViceDispatcherDepartments { get; set; }
+        public virtual ICollection<CoordinatorDepartment_Relation> CoordinatorDepartments_Relations { get; set; }
     }
 }
