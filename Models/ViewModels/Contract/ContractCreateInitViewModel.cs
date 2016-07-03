@@ -41,7 +41,7 @@ namespace WebApplication1.Models.ViewModels
         public IEnumerable<SelectListItem> DepartmentList { get; set; }
 
         //this contract is only for the rightFormPartial
-        public Contract Contract { get; set; }
+        public WebApplication1.Models.Contract Contract { get; set; }
     }
 
 }

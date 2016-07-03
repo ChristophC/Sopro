@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using WebApplication1.Utilities.EventSystem;
+using System.ComponentModel.DataAnnotations.Schema;
 using FileHelpers;
 
 namespace WebApplication1.Models
@@ -11,6 +13,7 @@ namespace WebApplication1.Models
     [DelimitedRecord(",")]
     public class Contract
     {
+       
         public int Id { get; set; }
         //David: Type of IntContractNum changed to String
         [DisplayName("Int. VertragsNr")] //4.1
@@ -81,12 +84,11 @@ namespace WebApplication1.Models
         //Extra
         [DisplayName("Ist Rahmenvertrag")]
         public Nullable<bool> IsFrameContract { get; set; }
+
         //Not relevant
         [DisplayName("Dispatcher")]
         public string DispatcherId { get; set; }
-        
-
-
+            
         //virtua: multiple Objects
         [DisplayName("Unterzeichner")] //4.7
         public virtual ContractUser Signer { get; set; }
@@ -116,8 +118,10 @@ namespace WebApplication1.Models
         public virtual CostKind CostKind { get; set; }
         [DisplayName("Vertragspartner")] //4.18
         public virtual ContractPartner ContractPartner { get; set; }
+        
         [DisplayName("Vertragsstatus")] //4.29
         public virtual ContractStatus ContractStatus { get; set; }
+           
         [DisplayName("Ablageort")] //4.30
         public virtual PhysicalDocAddress PhysicalDocAddress { get; set; }
 
@@ -137,6 +141,70 @@ namespace WebApplication1.Models
         [DisplayName("Vertragslaufzeitoptionen")] //Ober
         public Nullable<ContractRuntimeTypes> RuntimeType { get; set; } //Ober set nullable
 
+        //Events for the DispatcherTask
+        public delegate void DispatcherTaskEventHandler(object source, EventArgs args);
+        public event DispatcherTaskEventHandler DispatcherTask;
+
+        protected virtual void OnDispatcherTask()
+        {
+            if(DispatcherTask != null)
+            {
+                DispatcherTask(this, EventArgs.Empty);
+            }
+        }
+
+        //Add Listeners here
+        public void TriggerDispatcherTaskEvent()
+        {
+            this.DispatcherTask += EventUtility.OnTestEvent;
+            OnDispatcherTask();
+            this.DispatcherTask -= EventUtility.OnTestEvent;
+        }
+
+
+        //Events when the dispatcher is set
+        public delegate void DispatcherSetEventHandler(object source, EventArgs args);
+        public event DispatcherSetEventHandler DispatcherSet;
+
+        protected virtual void OnDispatcherSet()
+        {
+            if (DispatcherSet != null)
+            {
+                DispatcherSet(this, EventArgs.Empty);
+            }
+        }
+
+        //Add Listeners here
+        public void TriggerDispatcherSetEvent()
+        {
+            this.DispatcherSet += EventUtility.OnDispatcherSet;
+            OnDispatcherSet();
+            this.DispatcherSet -= EventUtility.OnDispatcherSet;
+        }
+
+        //David: Events for Tasks ***********************************************************************ENDE
+
+
+        public override bool Equals(Object o)
+        {
+            var item = o as Contract;
+            if (item != null)
+            {
+                return item.Id == Id;
+            }
+            return false;
+        }
+
+        public static bool operator ==(Contract a, Contract b)
+        {
+            return a.Equals(b);
+        }
+
+        public static bool operator!=(Contract a, Contract b)
+        {
+            return !a.Equals(b);
+        }
+
     }
 
     //David: Nur als Info zur Art der Laufzeit des Vertrags
@@ -154,4 +222,5 @@ namespace WebApplication1.Models
         [Description("unbefristet mit stillschweigender Verlängerung")]
         unlimited = 3  //= 3 unbefristet mit stillschweigender Verlaengerung
     }
+
 }

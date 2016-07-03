@@ -77,7 +77,7 @@ namespace WebApplication1.Models.ViewModels
 
         //public virtual ContractPartner ContractPartner { get; set; }
 
-        public Contract Contract { get; set; }
+        public WebApplication1.Models.Contract Contract { get; set; }
     }
 
 

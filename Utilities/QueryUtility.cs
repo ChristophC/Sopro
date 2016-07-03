@@ -138,13 +138,13 @@ namespace WebApplication1.Utilities
         public static IQueryable<Contract> GetAllReadAbleContractsOfUser(string userName, MyDbContext db)
         {
             var query = from c in db.Contracts
-                        where UsersFromContract(c, userName, db)
+                        where ReadingAllowed(c, userName, db)
                         select c;
             return query;
         }
 
         //Checks whether a user has reading permissions for a specific contract
-        public static bool UsersFromContract(Contract contract, string userId, MyDbContext db)
+        public static bool ReadingAllowed(Contract contract, string userId, MyDbContext db)
         {
             if (contract.OwnerId == userId || contract.SignerId == userId || contract.DispatcherId == userId)
                 return true;
@@ -161,7 +161,7 @@ namespace WebApplication1.Utilities
             }
             var readDepts = from rd in db.ReadAccessDepartments
                             where rd.ContractId == contract.Id
-                            select rd.DepartmentId;
+                            select (int)rd.DepartmentId;
             foreach (int dpt in readDepts)
             {
                 accesDepts.Add(dpt);

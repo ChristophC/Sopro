@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Web;
 using System.Text;
 using FileHelpers;
 using WebApplication1.Models;
@@ -12,7 +14,8 @@ namespace WebApplication1.Utilities
         public static void ContractExport(IEnumerable<Contract> contracts, TextWriter writer)
         {
             List<ContractExportViewModel> export = new List<ContractExportViewModel>();
-            foreach (Contract c in contracts)
+            List<Contract> contractList = contracts.ToList();
+            foreach (Contract c in contractList)
             {
                 export.Add(new ContractExportViewModel(c));
             }
@@ -20,7 +23,9 @@ namespace WebApplication1.Utilities
             {
                 HeaderText = typeof(ContractExportViewModel).GetCsvHeader()
             };
-            engine.WriteStream(writer, export);
+            engine.WriteFile(@"C:\Users\Christoph\Desktop\test.csv", export);
         }
+
+       
     }
 }

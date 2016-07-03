@@ -10,6 +10,7 @@ namespace WebApplication1.Models.ViewModels
     [DelimitedRecord(",")]
     public class ReportDepartmentViewModel
     {
+        public int Id { get; set; }
         [DisplayName("Abteilung")]
         [FieldOrder(1), FieldTitle("Abteilung")]
         public string Name { get; set; }

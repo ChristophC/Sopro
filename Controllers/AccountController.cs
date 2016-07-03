@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WebApplication1.Models;
+using WebApplication1.Models.ViewModels;
 using System.Data.Entity.Migrations;
 using WebApplication1.Utilities;
 using System.Web.Security;
@@ -160,9 +161,9 @@ namespace WebApplication1.Controllers
         public ActionResult Register()
         {
             //Ober: Addes Client and Department Field
-            var clients = db.Mandants;
-            ViewBag.Client = new SelectList(clients, "Id", "MandantName");
-            var departments = QueryUtility.GetDepartmentsFromClient(clients.Select(c => c.MandantName).FirstOrDefault(), db);
+            var clients = db.Clients;
+            ViewBag.Client = new SelectList(clients, "Id", "ClientName");
+            var departments = QueryUtility.GetDepartmentsFromClient(clients.Select(c => c.ClientName).FirstOrDefault(), db);
             ViewBag.Department = new SelectList(departments, "Id", "DepartmentName");
             //Ober:end
             return View();
@@ -181,11 +182,11 @@ namespace WebApplication1.Controllers
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
 
-                //Ober: added Department to DU_Relation
+                //Ober: added Department to DepartmentUser_Relation
 
-                db.DU_Relations.AddOrUpdate(
+                db.DepartmentUser_Relations.AddOrUpdate(
                     p => p.UserID,
-                    new WebApplication1.Models.DU_Relation { UserID = user.Id, DepartmentID = db.Departments.Single(i => i.DepartmentName == department).Id }
+                    new DepartmentUser_Relation { UserID = user.Id, DepartmentID = db.Departments.Single(i => i.DepartmentName == department).Id }
                 );
                 db.SaveChanges();
                 //Ober:end
@@ -204,9 +205,9 @@ namespace WebApplication1.Controllers
                 AddErrors(result);
             }
 
-            var clients = db.Mandants;
-            ViewBag.Client = new SelectList(clients, "Id", "MandantName");
-            var departments = QueryUtility.GetDepartmentsFromClient(clients.Select(c => c.MandantName).FirstOrDefault(), db);
+            var clients = db.Clients;
+            ViewBag.Client = new SelectList(clients, "Id", "ClientName");
+            var departments = QueryUtility.GetDepartmentsFromClient(clients.Select(c => c.ClientName).FirstOrDefault(), db);
             ViewBag.Department = new SelectList(departments, "Id", "DepartmentName");
 
             // If we got this far, something failed, redisplay form
@@ -523,7 +524,7 @@ namespace WebApplication1.Controllers
         }
         #endregion
         //Ober:
-        //Gets the Departments of Dispatcher depend on the Mandant
+        //Gets the Departments of Dispatcher depend on the Client
 
         [HttpPost]
         [AllowAnonymous]

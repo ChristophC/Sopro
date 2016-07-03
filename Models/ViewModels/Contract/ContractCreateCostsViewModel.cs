@@ -53,7 +53,7 @@ namespace WebApplication1.Models.ViewModels
         public int? CostKindId { get; set; }
 
         //Contract only used by RightForm
-        public Contract Contract { get; set; }
+        public WebApplication1.Models.Contract Contract { get; set; }
 
         
         public IEnumerable<SelectListItem> CostKinds { get; set; }

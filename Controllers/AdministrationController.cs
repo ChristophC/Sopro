@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
+using WebApplication1.Utilities;
 
 namespace WebApplication1.Controllers
 {
@@ -24,6 +25,10 @@ namespace WebApplication1.Controllers
         // GET: Administration
         public ActionResult Index()
         {
+            //Ober: Add UserRole-Management-Fields
+            ViewBag.ClientSelect = new SelectList(db.Clients, "Id", "ClientName");
+            ViewBag.UserSelect = new SelectList(db.Users, "Id", "UserName");
+            ViewBag.RoleSelect = new SelectList(db.Roles, "Id", "Name");
             return View(db.Contracts.ToList());
         }
 
@@ -61,6 +66,27 @@ namespace WebApplication1.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        //Helpers
+        public ActionResult GetJsonUsersFromClient(string client)
+        {
+            var departments = QueryUtility.GetDepartmentsFromClient(client, db);
+            IEnumerable<ContractUser> users = Enumerable.Empty<ContractUser>();
+            //users.Concat(new[] { manager.FindByName("Admin") });
+            foreach (Department d in departments)
+            {
+                if(d.DepartmentName != null) {
+                    IEnumerable<ContractUser> addUser = QueryUtility.GetUsersFromDepartment(d.DepartmentName, db).AsEnumerable<ContractUser>();
+                    if(addUser.Any())
+                    {
+                        users = users.Concat(addUser);
+                    }
+                }
+            }
+            //IQueryable<ContractUser> test = QueryUtility.GetUsersFromDepartment(departments.FirstOrDefault().DepartmentName, db);
+            List<SelectListItem> data = new SelectList(users, "Id", "UserName").ToList();
+            return Json(data);
         }
     }
 }

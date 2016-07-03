@@ -18,5 +18,25 @@ namespace WebApplication1.Models
         public virtual ICollection<Contract> SupervisorContracts { get; set; }
         public virtual ICollection<PhysicalDocAddress> PhysicalDocAddresses { get; set; }
         public virtual ICollection<CoordinatorDepartment_Relation> CoordinatorDepartment_Relations { get; set; }
+
+        public override bool Equals(object o)
+        {
+            var item = o as Department;
+            if (item != null)
+            {
+                return item.Id == Id;
+            }
+            return false;
+        }
+
+        public static bool operator ==(Department a, Department b)
+        {
+            return a.Equals(b);
+        }
+
+        public static bool operator !=(Department a, Department b)
+        {
+            return !a.Equals(b);
+        }
     }
 }

@@ -47,6 +47,6 @@ namespace WebApplication1.Models.ViewModels
         public Nullable<int> AutoExtension { get; set; }
 
         //Used to show infos on rightForm
-        public Contract Contract;
+        public WebApplication1.Models.Contract Contract;
     }
 }

@@ -89,9 +89,11 @@ namespace WebApplication1.Models
         public DbSet<CoordinatorClient_Relation> CoordinatorClient_Relations { get; set; }
         public DbSet<DepartmentUser_Relation> DepartmentUser_Relations { get; set; }
         public DbSet<ReadAccessUser> ReadAccessUsers { get; set; }
-        public DbSet<ReadAccessDepartments> ReadAccessDepartments { get; set; }
+        public DbSet<ReadAccessDepartment> ReadAccessDepartments { get; set; }
         public DbSet<CoordinatorDepartment_Relation> CoordinatorDepartment_Relations { get; set; }
         public DbSet<ContractCostCenter_Relation> ContractCostCenter_Relations { get; set; }
+
+        public DbSet<GetsReportsFromClient> GetsReportsFromClient { get; set; }
 
     }
 }

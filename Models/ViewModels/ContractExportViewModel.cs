@@ -12,18 +12,24 @@ namespace WebApplication1.Models.ViewModels.Contract
     {
         [FieldOrder(1), FieldTitle("Int. VertragsNr.")]
         public string IntContractNum { get; set; }
-        [FieldOrder(2), FieldTitle("Ext. VertragsNr")]
+        [FieldOrder(2), FieldTitle ("Ext. VertragsNr")]
         public string ExtContractNum { get; set; }
-        [FieldOrder(3), FieldTitle("Vertragsgegenstand")]
+        [FieldOrder(3), FieldTitle ("Vertragsgegenstand")]
         public string Description { get; set; }
-        [FieldOrder(4), FieldTitle("Unterzeichner")]
+        [FieldOrder(4), FieldTitle ("Unterzeichner")]
         public string Signer { get; set; }
-        [FieldOrder(5), FieldTitle("Sachlich Verantwortlicher")]
+        [FieldOrder(5), FieldTitle ("Sachlich Verantwortlicher")]
         public string Owner { get; set; }
-        [FieldOrder(6), FieldTitle("Zugeordnete Abt.")]
+        [FieldOrder(6), FieldTitle ("Zugeordnete Abt.")]
         public string Department { get; set; }
-        [FieldOrder(7), FieldTitle("Überwachende Abt.")]
+        [FieldOrder(7), FieldTitle ("Überwachende Abt.")]
         public string SupervisorDepartment { get; set; }
+
+
+        private ContractExportViewModel()
+        {
+        }
+
 
         public ContractExportViewModel(WebApplication1.Models.Contract c)
         {

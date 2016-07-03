@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Mvc;
+using WebApplication1.Models;
 
 namespace WebApplication1.Models.ViewModels
 {
@@ -149,10 +150,10 @@ namespace WebApplication1.Models.ViewModels
 
 
         //where the results stored
-        public List<Contract> Contracts { get; set; }
+        public List<WebApplication1.Models.Contract> Contracts { get; set; }
 
         //Sample
-        public Contract sample { get; set; }
+        public WebApplication1.Models.Contract sample { get; set; }
     }
 
 
@@ -167,11 +168,11 @@ namespace WebApplication1.Models.ViewModels
 
     public class ContractSearchLogic
     {
-        private List<Contract> Contracts;
+        private List<WebApplication1.Models.Contract> Contracts;
 
         public ContractSearchLogic()
         {
-            Contracts = new List<Contract>();
+            Contracts = new List<Models.Contract>();
 
         }
         public string GenerateQuery(ContractAdvancedSearchViewModel AdvancedSearchViewModel)
@@ -724,7 +725,7 @@ namespace WebApplication1.Models.ViewModels
                         // Read advances to the next row.
                         while (reader.Read())
                         {
-                            Contract Contract = new Contract();
+                            WebApplication1.Models.Contract Contract = new WebApplication1.Models.Contract();
                             // To avoid unexpected bugs access columns by name.
                             Contract.Id = reader.GetInt32(reader.GetOrdinal("Id"));
                             Contract.IntContractNum = reader.IsDBNull(reader.GetOrdinal("IntContractNum")) ? null : reader.GetString(reader.GetOrdinal("IntContractNum"));
